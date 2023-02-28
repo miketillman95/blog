@@ -14,11 +14,11 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::latest()->paginate(10)
+        $blogs = Blog::latest()->paginate(10);
         return [
             "status"=> 1,
             "data" => $blogs
-        ]
+        ];
     }
 
     /**
@@ -42,7 +42,7 @@ class BlogController extends Controller
         $requrest->validate([
             'title' => 'required',
             'body' => 'required'
-        ])
+        ]);
 
         $blog = Blog::create($request-> all());
         return [
@@ -62,7 +62,7 @@ class BlogController extends Controller
         return [
             "status"=> 1,
             "data" => $blog
-        ]
+        ];
     }
 
     /**
@@ -88,9 +88,9 @@ class BlogController extends Controller
         $request->validate([
             'title'=> 'required',
             'body' => 'required'
-        ])
+        ]);
 
-        $blog->update($request->all())
+        $blog->update($request->all());
 
         return[
             "status"=> 1,
@@ -112,6 +112,6 @@ class BlogController extends Controller
             "status" => 1,
             "data" => $blog,
             "msg" => "Blog successfully deleted"
-        ]
+        ];
     }
 }
