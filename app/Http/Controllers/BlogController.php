@@ -90,12 +90,13 @@ class BlogController extends Controller
             'body' => 'required'
         ])
 
-        $blog-update($request->all())
+        $blog->update($request->all())
 
         return[
             "status"=> 1,
-            ""
-        ]
+            "data" => $blog,
+            "msg" => "Blog sucessfully updated"
+        ];
     }
 
     /**
@@ -106,6 +107,11 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog -> delete();
+        return [
+            "status" => 1,
+            "data" => $blog,
+            "msg" => "Blog successfully deleted"
+        ]
     }
 }
