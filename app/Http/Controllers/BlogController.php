@@ -28,7 +28,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -39,16 +39,17 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $requrest->validate([
+        $request->validate([
             'title' => 'required',
             'body' => 'required'
         ]);
 
-        $blog = Blog::create($request-> all());
-        return [
-            "status"=> 1,
-            "data"=> $blog
-        ];
+        $blog = Blog::create($request->all());
+
+        return response()->json([
+            'status' => 1,
+            'data' => $blog
+        ], 201);
     }
 
     /**
@@ -83,20 +84,22 @@ class BlogController extends Controller
      * @param  \App\Models\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title'=> 'required',
             'body' => 'required'
         ]);
 
+        $blog = Blog::find($id);
         $blog->update($request->all());
-
-        return[
-            "status"=> 1,
+    
+        return [
+            "status" => 1,
             "data" => $blog,
-            "msg" => "Blog sucessfully updated"
+            "msg" => "Blog successfully updated"
         ];
+        Log::info('this worked');
     }
 
     /**

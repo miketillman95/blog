@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('api/blogs', function () {
+Route::get('/api/blogs', function () {
     $blogs = Blog::all();
     return response()->json($blogs);
 });
